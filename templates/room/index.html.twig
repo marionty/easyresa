@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ oneRoom.name }}
+{% endblock %}
+
+{% block body %}
+<div class="row pt-3 pb-3">
+		<div class="card p-4 rounded-3">
+	<h1>{{ oneRoom.name }} capacité :{{ oneRoom.capacity }}</h1>
+	<p>{{ oneRoom.description }}</p>
+</div>
+</div>
+
+	<div class="col-md-12 text-center">
+		<a class="btn btn-warning" href={{ path('app_rooms') }}>Revenir à toutes les notes</a>
+		<a class="btn btn-warning" href="#">Réserver</a>
+	</div>
+
+	
+
+{% endblock %}
