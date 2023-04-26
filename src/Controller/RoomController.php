@@ -14,14 +14,16 @@ class RoomController extends AbstractController
     #[Route('/room/{id}', name: 'app_room', methods: ['GET', 'POST'])]
     public function show($id, RoomRepository $oneRoom): Response
     {
-        // Affiche la note demandée dans le template dédié
+        // Affiche la room demandée dans le template dédié
         return $this->render('room/index.html.twig', [
-            // Récupère la note demandée par son id
+            // Récupère la room demandée par son id
             'oneRoom' => $oneRoom->findOneBy(
                 ['id' => $id]
+               
+
             ),
-            
-        
-        ]);
+           
+
+        ]);      
     }
-}
+} 

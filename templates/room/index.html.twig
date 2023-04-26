@@ -9,6 +9,21 @@
 		<div class="card p-4 rounded-3">
 	<h1>{{ oneRoom.name }} capacité :{{ oneRoom.capacity }}</h1>
 	<p>{{ oneRoom.description }}</p>
+<h6> software :
+	{% for software in oneRoom.software %}
+	{{ software.name }}
+	{% endfor %}
+</h6>
+<h6> material :
+	{% for material in oneRoom.material %}
+	{{ material.name }}
+	{% endfor %}
+</h6>
+<h6> ergonomics :
+	{% for ergonomics in oneRoom.ergonomics %}
+	{{ ergonomics.name }}
+	{% endfor %}
+</h6>
 </div>
 </div>
 
