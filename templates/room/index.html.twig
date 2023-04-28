@@ -9,6 +9,7 @@
 		<div class="card p-4 rounded-3">
 	<h1>{{ oneRoom.name }} capacité :{{ oneRoom.capacity }}</h1>
 	<p>{{ oneRoom.description }}</p>
+	{# afficher les entités de manytomany dans room #}
 <h6> software :
 	{% for software in oneRoom.software %}
 	{{ software.name }}
@@ -29,7 +30,8 @@
 
 	<div class="col-md-12 text-center">
 		<a class="btn btn-warning" href={{ path('app_rooms') }}>Revenir à toutes les notes</a>
-		<a class="btn btn-warning" href="#">Réserver</a>
+		<a class="btn btn-warning" href={{path ("app_reservation", {'id': oneRoom.id }) }}>Réserver</a>
+		
 	</div>
 
 	
