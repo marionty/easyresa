@@ -64,7 +64,7 @@ class MesreservationsController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->flush();
 
-            return $this->redirectToRoute('mesreservations/editsuccess.html.twig');
+            return $this->render('mesreservations/editsuccess.html.twig');
         }
 
         return $this->render('mesreservations/edit.html.twig', [
