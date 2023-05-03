@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Room;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
+
 
 /**
  * @extends ServiceEntityRepository<Room>
@@ -38,6 +40,32 @@ class RoomRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findRoomBySearch(array $criteria)
+    {
+        $queryBuilder = $this->createQueryBuilder('r');
+        $queryBuilder->join('r.material', 'm');
+        $queryBuilder->join('r.software', 's');
+        $queryBuilder->join('r.ergonomics', 'e');
+
+        foreach($criteria['material'] as $material){
+            $queryBuilder->andWhere('m IN (:material)')
+                ->setParameter('material', $material);
+        }
+        
+        foreach($criteria['software'] as $software){
+            $queryBuilder->andWhere('s IN (:software)')
+                ->setParameter('software', $software);
+        }
+        
+        foreach($criteria['ergonomics'] as $ergonomic){
+            $queryBuilder->andWhere('e IN (:ergonomics)')
+                ->setParameter('ergonomics', $ergonomic);
+        }
+        
+        return $queryBuilder->getQuery()->getResult();
+    }
+}
+
 
 
 //    /**
@@ -64,4 +92,3 @@ class RoomRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}

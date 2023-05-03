@@ -10,13 +10,13 @@
         <div class="shadow card card-bg rounded-3" style="width: 40rem;">
             <div class="card-body">
     <p>Réservation de {{ reservation.room.name }} du {{ reservation.startDate|date('d/m/Y H:i') }} au {{ reservation.endDate|date('d/m/Y H:i') }}</p>
-        <div>
+        <div style= "display:flex">
         <form action={{ path('edit_reservation', {'id': reservation.id} ) }} method="post">
                                 <button type="submit" class="btn btn-primary">Modifier</button>
                             </form>
                                 
          <form action={{ path('delete_reservation', {'id': reservation.id} ) }} method="post">
-                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                                <button type="submit" class="btn btn-danger mx-4">Supprimer</button>
                             </form>
                         </div>
                     </div>

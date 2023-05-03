@@ -2,21 +2,33 @@
 
 namespace App\Controller;
 
+use App\Form\RoomFilterType;
+use App\Repository\RoomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Repository\RoomRepository;
-
 class RoomsController extends AbstractController
 {
+ 
     #[Route('/rooms', name: 'app_rooms')]
-    public function index(RoomRepository $room): Response
+    public function roomfiltertype(RoomRepository $roomRepository, Request $request): Response
     {
-        $liste = $room->findAll();
+        $form = $this->createForm(RoomFilterType::class);
+        $form->handleRequest($request);
+
+        $rooms = $roomRepository->findAll();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $rooms = $roomRepository->findRoomBySearch($data);
+        }
 
         return $this->render('rooms/index.html.twig', [
-            'liste_twig' => $liste,
+            'rooms' => $rooms,
+            'form' => $form->createView(),
         ]);
     }
 }
