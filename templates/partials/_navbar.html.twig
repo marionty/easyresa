@@ -20,11 +20,11 @@
        
        <div class="d-grid gap-2 d-md-block">
       {% if app.user %}
-        <a href={{ path ("app_logout")}} class="btn btn-primary">Déconnexion</a>
-        <a href={{ path ('app_mesreservations') }} class="btn btn-primary">Account</a>
+        <a href={{ path ("app_logout")}} class="btn bg-dark text-white">Déconnexion</a>
+        <a href={{ path ('app_mesreservations') }} class="btn btn-warning">Account</a>
       {% else %}
-        <a href={{ path ('app_register') }} class="btn btn-primary" >S'inscrire</a>
-        <a href={{ path ('app_login') }} class="btn btn-primary" >Se connecter</a>
+        <a href={{ path ('app_register') }} class="btn bg-dark text-white" >S'inscrire</a>
+        <a href={{ path ('app_login') }} class= "btn btn-warning">Se connecter</a>
       {% endif %}
         </div>
      

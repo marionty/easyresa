@@ -4,11 +4,3 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-app_rooms_index:
-    path: /rooms
-    controller: App\Controller\RoomsController::index
-
-app_rooms_filter:
-    path: /rooms/filter
-    controller: App\Controller\RoomsController::index
-    methods: [POST]

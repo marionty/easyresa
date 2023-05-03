@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
-{% block title %}Success
-{% endblock %}
+
+{% block title %}Success{% endblock %}
+
 {% block body %}
-    <div class="card">
-        <div class="card-body">
-           
-            <h3 class="card-text text-center">Your reservation has correctly been deleted!</h3><br>
-            <div class="mx-auto" style="width: 200px;"><a href={{path ('app_home')}} class="btn btn-primary mx-auto">Return to home</a></div>
+    <div class="container my-5">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Your reservation has been deleted!</h3>
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <a href="{{ path('app_home') }}" class="btn btn-primary">Return to home</a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

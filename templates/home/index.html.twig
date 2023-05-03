@@ -1,10 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Easyrésa{% endblock %}
 
 {% block body %}
+<div class="container my-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-8 text-center">
+      <h1 class="mb-4">Welcome to Easyrésa</h1>
+      <p class="lead">Réservez facilement votre salle de réunion en ligne</p>
+    </div>
+  </div>
 
-    <h1>Hello</h1>
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="https://source.unsplash.com/random/800x600/?conference" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Salle de réunion standard</h5>
+          <p class="card-text">Une salle de réunion classique pour vos réunions et présentations. Capacité jusqu'à 12 personnes.</p>
+        </div>
+        <div class="card-footer text-center">
+          <a href="{{ path('app_rooms') }}" class="btn btn-warning">Vois les rooms</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="https://source.unsplash.com/random/800x600/?meeting" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Salle de réunion premium</h5>
+          <p class="card-text">Une salle de réunion équipée pour vos événements professionnels. Capacité jusqu'à 20 personnes.</p>
+        </div>
+        <div class="card-footer text-center">
+          <a href="{{ path('app_rooms') }}" class="btn btn-warning">Vois les rooms</a>
+        </div>
+      </div>
+    </div>
 
-   
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="https://source.unsplash.com/random/800x600/?workspace" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Espace de coworking</h5>
+          <p class="card-text">Un espace de travail partagé pour vos projets collaboratifs. Postes de travail et espaces de détente disponibles.</p>
+        </div>
+        <div class="card-footer text-center">
+          <a href="{{ path('app_rooms') }}" class="btn btn-warning">Vois les rooms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

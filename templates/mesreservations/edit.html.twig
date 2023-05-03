@@ -3,14 +3,32 @@
 {% block title %}Modifier une réservation{% endblock %}
 
 {% block body %}
-    <h1>Modifier une réservation</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h1 class="card-title mb-0">Modifier une réservation</h1>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form) }}
 
-    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_label(form.startDate, 'Date de début', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+                        </div>
 
-    {{ form_widget(form.startDate) }}
-    {{ form_widget(form.endDate) }}
+                        <div class="mb-3">
+                            {{ form_label(form.endDate, 'Date de fin', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.endDate, {'attr': {'class': 'form-control'}}) }}
+                        </div>
 
-    {{ form_widget(form.save) }}
+                        {{ form_widget(form.save, {'label': 'Modifier', 'attr': {'class': 'btn btn-warning'}}) }}
 
-    {{ form_end(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

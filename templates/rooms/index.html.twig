@@ -4,50 +4,47 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid mb-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                {{ form_start(form) }}
-                {#<div class="form-group">
-                     {{ form_label(form.capacity) }}
-                    {{ form_widget(form.capacity) }}
-                </div> #}
-                <div class="form-group">
-                    {{ form_label(form.material) }}
-                    {{ form_widget(form.material) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.ergonomics) }}
-                    {{ form_widget(form.ergonomics) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.software) }}
-                    {{ form_widget(form.software) }}
-                </div>
-                <button type="submit" class="btn btn-primary">Filtrer</button>
-                {{ form_end(form) }}
-            </div>
-        </div>
-    </div>
 
-    <div class="row mt-5">
-        {% for room in rooms %}
-            <div class="shadow col-md-4 mb-4">
-                <div class="card card-bg rounded-4">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ room.name }}
-                            capacité:
-                            {{ room.capacity }}</h5>
-                        <p class="card-text">{{ room.description }}</p>
-                        <a href={{ path('app_room', { id: room.id } ) }} class="btn btn-gradient">Voir la room</a>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <p>Aucune room trouvée</p>
-        {% endfor %}
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+        <h3>Recherchez vos critéres</h3>
+          {{ form_start(form) }}
+          {{ form_label(form.capacity, 'Capacité de la salle') }}
+          {{ form_widget(form.capacity, {'attr': {'class': 'form-control mb-3'}}) }}
+          {{ form_label(form.material, 'Matériel') }}
+          {{ form_widget(form.material, {'attr': {'class': 'form-control mb-3'}}) }}
+          {{ form_label(form.ergonomics, 'Ergonomie') }}
+          {{ form_widget(form.ergonomics, {'attr': {'class': 'form-control mb-3'}}) }}
+          {{ form_label(form.software, 'Logiciel') }}
+          {{ form_widget(form.software, {'attr': {'class': 'form-control mb-3'}}) }}
+          <button type="submit" class="btn btn-danger">Rechercher</button>
+          {{ form_end(form) }}
+        </div>
+      </div>
     </div>
+    <div class="col-md-9">
+      <div class="row">
+        {% for room in rooms %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="https://source.unsplash.com/200x200/?workspace,office{{ room.name }}" class="card-img-top" alt="room"><!-- une image pour chaque salle -->
+            <div class="card-body">
+              <h5 class="card-title">{{ room.name }}</h5>
+              <p class="card-text">{{ room.description }}</p>
+              <a href="{{ path('app_room', { id: room.id }) }}" class="btn btn-danger">Voir la room</a>
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <p>Aucune room trouvée</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
 

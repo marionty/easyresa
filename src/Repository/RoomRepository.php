@@ -22,7 +22,12 @@ class RoomRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Room::class);
     }
-
+/**
+     * Enregistre une entité Room en base de données.
+     *
+     * @param Room $entity
+     * @param bool $flush  Si vrai, exécute immédiatement la requête SQL.
+     */
     public function save(Room $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -31,7 +36,12 @@ class RoomRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+/**
+     * Supprime une entité Room de la base de données.
+     *
+     * @param Room $entity
+     * @param bool $flush  Si vrai, exécute immédiatement la requête SQL.
+     */
     public function remove(Room $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -40,23 +50,36 @@ class RoomRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     * Recherche les salles qui correspondent aux critères de recherche passés en paramètre.
+     *
+     * @param array $criteria  Tableau associatif contenant les critères de recherche.
+     *
+     * @return Room[]           Tableau des salles correspondantes.
+     */
     public function findRoomBySearch(array $criteria)
     {
         $queryBuilder = $this->createQueryBuilder('r');
+        // Joindre les tables des matériaux, logiciels et ergonomie pour pouvoir les utiliser dans la requête.
         $queryBuilder->join('r.material', 'm');
         $queryBuilder->join('r.software', 's');
         $queryBuilder->join('r.ergonomics', 'e');
-
+        // Ajouter un critère sur la capacité de la salle si celui-ci est renseigné.
+        if (isset($criteria['capacity'])) {
+            $queryBuilder->andWhere('r.capacity >= :capacity')
+                ->setParameter('capacity', $criteria['capacity']);
+        }
+        // Ajouter un critère pour chaque matériau sélectionné.
         foreach($criteria['material'] as $material){
             $queryBuilder->andWhere('m IN (:material)')
                 ->setParameter('material', $material);
         }
-        
+        // Ajouter un critère pour chaque logiciel sélectionné.
         foreach($criteria['software'] as $software){
             $queryBuilder->andWhere('s IN (:software)')
                 ->setParameter('software', $software);
         }
-        
+        // Ajouter un critère pour chaque caractéristique ergonomique sélectionnée.
         foreach($criteria['ergonomics'] as $ergonomic){
             $queryBuilder->andWhere('e IN (:ergonomics)')
                 ->setParameter('ergonomics', $ergonomic);

@@ -27,8 +27,12 @@ class ReservationController extends AbstractController
         $reservation->setRoom($room);
 
         $form = $this->createFormBuilder($reservation)
-        ->add('startDate', DateTimeType::class)
-        ->add('endDate', DateTimeType::class)
+            ->add('startDate', DateTimeType::class, [
+                'data' => new \DateTime('Europe/Paris'),
+            ])
+            ->add('endDate', DateTimeType::class, [
+                'data' => new \DateTime('Europe/Paris'),
+            ])
         ->add('save', SubmitType::class, ['label' => 'Reserve'])
         ->getForm();
 

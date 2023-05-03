@@ -1,39 +1,64 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}
-	{{ oneRoom.name }}
+    {{ oneRoom.name }}
 {% endblock %}
 
 {% block body %}
-<div class="row pt-3 pb-3">
-		<div class="card p-4 rounded-3">
-	<h1>{{ oneRoom.name }} capacité :{{ oneRoom.capacity }}</h1>
-	<p>{{ oneRoom.description }}</p>
-	{# afficher les entités de manytomany dans room #}
-<h6> software :
-	{% for software in oneRoom.software %}
-	{{ software.name }}
-	{% endfor %}
-</h6>
-<h6> material :
-	{% for material in oneRoom.material %}
-	{{ material.name }}
-	{% endfor %}
-</h6>
-<h6> ergonomics :
-	{% for ergonomics in oneRoom.ergonomics %}
-	{{ ergonomics.name }}
-	{% endfor %}
-</h6>
-</div>
-</div>
+    <div class="row pt-3 pb-3 justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-0 rounded-3">
+                <img src="https://source.unsplash.com/random/800x400/?workspace" alt="Room" class="card-img-top">
+                <div class="card-img-overlay" style=" -webkit-text-stroke: 1px black;">
 
-	<div class="col-md-12 text-center">
-		<a class="btn btn-warning" href={{ path('app_rooms') }}>Revenir à toutes les notes</a>
-		<a class="btn btn-warning" href={{path ("app_reservation", {'id': oneRoom.id }) }}>Réserver</a>
-		
-	</div>
-
-	
-
+                    <h1 class="card-title text-white">{{ oneRoom.name }} - capacité : {{ oneRoom.capacity }}</h1>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ oneRoom.description }}</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card p-4 rounded-3 bg-secondary text-white">
+                                <h5 class="mb-4">Avantages &amp; Services</h5>
+                                <p><strong>Toujours compris :</strong> L'eau, la WIFI et notre sourire</p>
+                                <p><strong>Les options :</strong> petit-déjeuner, déjeuner, pause gourmande, apéritif, activités teambuilding, services de secrétariat et matériel de conférence.</p>
+                                <p><strong>Jamais chez nous :</strong> La surconsommation de plastique, nous avons une démarche d'achat responsable et de réduction des déchets et du gaspillage.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h5 class="mb-4">Des espaces modulables et équipés</h5>
+                            <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card p-4 rounded-3">
+                                            <h6 style="text-align: center; color: #333333; text-decoration: underline;">Material</h6>
+                                            {% for material in oneRoom.material %}
+                                                <p>{{ material.name }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card p-4 rounded-3">
+                                            <h6 style="text-align: center; color: #333333; text-decoration: underline;">Ergonomics</h6>
+                                            {% for ergonomics in oneRoom.ergonomics %}
+                                                <p>{{ ergonomics.name }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card p-4 rounded-3">
+                                            <h6 style="text-align: center; color: #333333; text-decoration: underline;">Software</h6>
+                                            {% for software in oneRoom.software %}
+                                                <p>{{ software.name }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a class="btn btn-light" href="{{ path ('app_rooms') }}">Revenir à toutes les rooms</a>
+                        <a class="btn btn-warning" href="{{ path ('app_reservation', {'id': oneRoom.id } ) }}">Réserver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
