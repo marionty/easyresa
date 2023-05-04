@@ -24,7 +24,7 @@ class BookingType extends AbstractType
                 'label' => 'End date and time',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Reserve',
+                'label' => 'Réserver',
             ]);
     }
 

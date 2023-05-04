@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Reservation;
@@ -14,18 +13,23 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class MesreservationsController extends AbstractController
 {
+    // Route pour afficher les réservations de l'utilisateur connecté
     #[Route('/mesreservations', name: 'app_mesreservations')]
     public function mesReservations(ManagerRegistry $doctrine)
     {
-        $user = $this->getUser(); // Obtenez l'utilisateur connecté
-        $reservations = $doctrine->getRepository(Reservation::class)->findBy(['user' => $user]);
-        // Obtenez toutes les réservations de cet utilisateur
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
 
+        // Trouver toutes les réservations de l'utilisateur
+        $reservations = $doctrine->getRepository(Reservation::class)->findBy(['user' => $user]);
+
+        // Rendre la vue des réservations
         return $this->render('mesreservations/index.html.twig', [
             'reservations' => $reservations,
         ]);
     }
-    // Route qui permet de supprimer une réservation
+
+    // Route pour supprimer une réservation
     #[Route('reservation/{id}/delete', name: 'delete_reservation', methods: ['GET', 'POST'])]
     public function delete(Reservation $reservation, ManagerRegistry $doctrine): Response
     {
@@ -34,15 +38,16 @@ class MesreservationsController extends AbstractController
             throw new AccessDeniedException();
         }
 
-        // Supprimer la réservation
+        // Supprimer la réservation de la base de données
         $entityManager = $doctrine->getManager();
         $entityManager->remove($reservation);
         $entityManager->flush();
 
-        // Rediriger l'utilisateur vers la page des reservations
+        // Rendre la vue de confirmation de suppression
         return $this->render('mesreservations/deletesuccess.html.twig');
     }
-    // Route qui permet de supprimer une réservation
+
+    // Route pour éditer une réservation
     #[Route('reservation/{id}/edit', name: 'edit_reservation', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reservation $reservation, ManagerRegistry $doctrine): Response
     {
@@ -51,7 +56,7 @@ class MesreservationsController extends AbstractController
             throw new AccessDeniedException();
         }
 
-        // Créer le formulaire d'édition de réservation
+        // Créer un formulaire pour éditer la réservation
         $form = $this->createFormBuilder($reservation)
             ->add('startDate', DateTimeType::class, ['label' => 'Date de début'])
             ->add('endDate', DateTimeType::class, ['label' => 'Date de fin'])
@@ -61,18 +66,19 @@ class MesreservationsController extends AbstractController
         // Traitement du formulaire d'édition
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // Enregistrer les modifications dans la base de données
             $entityManager = $doctrine->getManager();
             $entityManager->flush();
 
+            // Rendre la vue de confirmation d'édition
             return $this->render('mesreservations/editsuccess.html.twig');
         }
 
+        // Rendre la vue d'édition de réservation
         return $this->render('mesreservations/edit.html.twig', [
             'reservation' => $reservation,
             'form' => $form->createView(),
-            
         ]);
     }
 }
-    
 

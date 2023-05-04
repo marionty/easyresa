@@ -8,13 +8,17 @@
         <div class="card-body">
             <h5 class="card-title text-center">{{ room.name }}</h5>
             <h6 class="card-subtitle mb-2 text-body-secondary text-center">Book this room</h6>
-            <h4 class="card-text">{{ form_start(form) }}</h4>
-            <h4 class="card-text text-center my-3">{{ form_row(form.startDate) }}</h4>
-            <h4 class="card-text text-center my-3">{{ form_row(form.endDate) }}</h4>
-            <h4 class="card-text text-center my-3">{{ form_row(form.save) }}</h4>
-            <h4 class="card-text text-center">{{ form_end(form) }}</h4>
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_row(form.startDate, {'attr': {'class': 'form-control my-3 text-center'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.endDate, {'attr': {'class': 'form-control my-3 text-center'}}) }}
+                </div>
+                <div class="text-center">
+                    {{ form_row(form.save, {'label': 'Réserver', 'attr': {'class': 'btn btn-warning'}}) }}
+                </div>
+            {{ form_end(form) }}
         </div>
     </div>
-
-
 {% endblock %}

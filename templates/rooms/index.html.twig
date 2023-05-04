@@ -20,7 +20,7 @@
           {{ form_widget(form.ergonomics, {'attr': {'class': 'form-control mb-3'}}) }}
           {{ form_label(form.software, 'Logiciel') }}
           {{ form_widget(form.software, {'attr': {'class': 'form-control mb-3'}}) }}
-          <button type="submit" class="btn btn-danger">Rechercher</button>
+          <button type="submit" class="btn btn-warning">Rechercher</button>
           {{ form_end(form) }}
         </div>
       </div>
@@ -34,7 +34,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ room.name }}</h5>
               <p class="card-text">{{ room.description }}</p>
-              <a href="{{ path('app_room', { id: room.id }) }}" class="btn btn-danger">Voir la room</a>
+              <a href="{{ path('app_room', { id: room.id }) }}" class="btn btn-warning">Voir la room</a>
             </div>
           </div>
         </div>
