@@ -12,9 +12,10 @@
                     <p>Réservation de {{ reservation.room.name }} du {{ reservation.startDate|date('d/m/Y H:i') }} au {{ reservation.endDate|date('d/m/Y H:i') }}</p>
                     <div class="d-flex justify-content-center"> 
                         <form action={{ path('edit_reservation', {'id': reservation.id} ) }} method="post">
+                        
                             <button type="submit" class="btn btn-dark">Modifier</button>
                         </form>
-                        <form action={{ path('delete_reservation', {'id': reservation.id} ) }} method="post">
+                        <form onclick="return confirm('Do you really want to delete this reservation ?')" action={{ path('delete_reservation', {'id': reservation.id} ) }} method="post">
                             <button type="submit" class="btn btn-warning mx-4">Supprimer</button>
                         </form>
                     </div>
